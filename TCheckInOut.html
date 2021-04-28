@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Ajax</title>
+</head>
+<body>
+
+<label for="UserId">UserId</label>
+<input type="text" name="UserId" id="UserId">
+
+<label for="Name">Name:</label>
+<input type="text" name="Name" id="Name">
+
+<label for="PhoneNumber">PhoneNumber</label>
+<input type="text" name="PhoneNumber" id="PhoneNumber">
+
+<label for="CheckIn">CheckIn</label>
+<input type="text" name="CheckIn" id="CheckIn">
+
+<label for="CheckOut">CheckOut</label>
+<input type="text" name="CheckOut" id="CheckOut">
+
+<br><br>
+
+ <button id="submit" onclick="submit()">Submit</button>
+
+<p id="p1"></p>
+
+<br>
+<hr>
+<br>
+</body>
+
+<body>
+
+ <h1>Search By Id </h1>
+
+<label for="searchKey">ID:</label>
+<input type="number" name="searchKey" id="searchKey">
+
+ <button id="search" onclick="search()">Search</button>
+
+<p id="p2"></p>
+
+ 
+
+ <script>
+function submit() {
+
+ 
+
+ var UserId = document.getElementById("UserId").value;
+ var Name = document.getElementById("Name").value;
+ var PhoneNumber = document.getElementById("PhoneNumber").value;
+ var CheckIn = document.getElementById("CheckIn").value;
+ var CheckOut = document.getElementById("CheckOut").value;
+if(UserId == "" || Name == "" || PhoneNumber == "" || CheckIn == "" ||CheckOut == "") {
+document.getElementById("p1").innerHTML = "Fill up the form properly";
+document.getElementById("p1").style.color = "red";
+}
+
+ 
+
+ else {
+
+var xhttp = new XMLHttpRequest();
+xhttp.onreadystatechange = function() {
+if(this.readyState == 4 && this.status == 200) {
+document.getElementById("p1").innerHTML = xhttp.responseText;
+document.getElementById("p1").style.color = "green";
+}
+}
+
+xhttp.open("POST", "TCheckInOut.php", true);
+xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+xhttp.send("UserId="+UserId+"&Name="+Name+"&PhoneNumber="+PhoneNumber+"&CheckIn="+CheckIn+"&CheckOut="+CheckOut);
+}
+}
+
+ 
+
+ function search() {
+var searchKey = document.getElementById("searchKey").value;
+
+ 
+
+ var xhttp = new XMLHttpRequest();
+xhttp.onreadystatechange = function() {
+if(this.readyState == 4 && this.status == 200) {
+document.getElementById("p2").innerHTML = xhttp.responseText;
+}
+}
+
+ 
+
+ xhttp.open("GET", "TCheckInOut.php?searchKey=" + searchKey, true);
+xhttp.send();
+}
+
+ 
+
+ </script>
+
+ 
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
